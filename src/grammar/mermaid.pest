@@ -47,7 +47,7 @@ method_parameter = {
     "(" ~ class_identifier* ~ ")"
 }
 
-file = {
+diagram = {
    SOI
    ~ "classDiagram"
    ~ NEWLINE+
