@@ -4,7 +4,7 @@ mod tests {
     use pest_derive::Parser;
 
     #[derive(Parser)]
-    #[grammar = "../pest/classDiagram.pest"]
+    #[grammar = "../src/grammar/mermaid.pest"]
     pub struct ExplicitClassParser;
 
     #[test]
