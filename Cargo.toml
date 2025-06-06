@@ -3,7 +3,7 @@ name = "mermaid-parser"
 version = "0.1.0"
 edition = "2024"
 license = "MIT"
-repository = "https://github.com/Last-butnotleast/RAIVEN"
+repository = "https://github.com/Last-butnotleast/mermaid-parser"
 description = "Lightweight Mermaid class-diagram parser powered by pest"
 
 
