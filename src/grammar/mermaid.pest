@@ -40,12 +40,21 @@ class_property = {
       | variable_identifier
     )
 }
+
 class_method = {
-    class_identifier ~ ":" ~ visibility? ~ class_identifier? ~ method_identifier ~ method_parameter
+    class_identifier
+    ~ ":"
+    ~ visibility?
+    ~ method_identifier
+    ~ method_parameter
 }
-method_parameter = {
-    "(" ~ class_identifier* ~ ")"
-}
+
+parameter        = { class_identifier ~ variable_identifier
+                   | variable_identifier }
+
+parameter_list   = { parameter ~ ("," ~ parameter)* }
+method_parameter = { "(" ~ parameter_list? ~ ")" }
+
 
 diagram = {
    SOI
@@ -72,16 +81,18 @@ association   = { "-->" | "<--" }
 dependency    = { "..>" | "<.." }
 link          = { "--" }
 
-member_stmt = {
-    class_identifier ~ ":" ~ class_identifier ~ class_identifier
-}
+member_stmt       = { class_identifier ~ ":" ~ member_decl }
+member_decl       = { class_method_decl | class_property_decl }
+class_method_decl = { visibility? ~ classifier? ~ method_identifier ~ method_parameter ~ (":" ~ class_identifier)? }
+class_property_decl = { visibility? ~ classifier? ~ (class_identifier ~ variable_identifier | variable_identifier) }
 
-visibility = _{public | private | protected | package}
 
-public = { "+" }
-private = { "-" }
-protected = { "#" }
-package = { "~" }
+visibility = @{ public | private | protected | package }
+public     = _{ "+" }
+private    = _{ "-" }
+protected  = _{ "#" }
+package    = _{ "~" }
+
 
 classifier = _{abstract | static}
 abstract = { "*" }
